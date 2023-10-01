@@ -13,8 +13,8 @@ def voisins(noeud, grille):
 
     for dx, dy in directions:
         nx, ny = x + dx, y + dy
-        if 0 <= nx < len(grille) and 0 <= ny < len(grille[0]): # Vérifiez que le voisin est dans la grille
-            if grille[nx][ny] == 0 or grille[nx][ny] == 3:  # Vérifiez que le voisin est un chemin ou un point d'arrivée
+        if 0 <= ny < len(grille) and 0 <= nx < len(grille[0]): # Vérifiez que le voisin est dans la grille
+            if grille[ny, nx] == 0 or grille[ny, nx] == 3:  # Vérifiez que le voisin est un chemin ou un point d'arrivée
                 voisins.append((nx, ny))
                 
 
@@ -31,7 +31,6 @@ def a_etoile(depart, arrivee, grille):
     while ouvert:
         f, g, noeud_courant = heappop(ouvert)  # retire le nœud avec le plus bas coût f
         ferme.add(noeud_courant)
-        print(parents)
 
         if noeud_courant == arrivee:
             # Trouvé un chemin

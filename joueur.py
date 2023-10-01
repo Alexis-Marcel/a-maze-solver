@@ -22,12 +22,12 @@ def deplacer_joueur(pos, action, labyrinthe):
     elif action == Action.BAS:
         dy = 1
         
-    if cellule_is_valide((pos[0] + dy, pos[1] + dx), labyrinthe):
-        return (pos[0] + dy, pos[1] + dx)
+    if cellule_is_valide((pos[0] + dx, pos[1] + dy), labyrinthe):
+        return (pos[0] + dx, pos[1] + dy)
 
     return pos
     
 
 def cellule_is_valide(pos, labyrinthe):
     x, y = pos
-    return 0 <= x < len(labyrinthe) and 0 <= y < len(labyrinthe[0]) and labyrinthe[x][y] != 1
+    return 0 <= y < len(labyrinthe) and 0 <= x < len(labyrinthe[0]) and labyrinthe[y][x] != 1

@@ -36,23 +36,25 @@ def generer_labyrinthe(lignes, colonnes, labyrinthe=None, adjacents=None):
 
 
 
+
+
 def trouver_depart_arrivee(labyrinthe):
     # Trouver le point de départ en haut à gauche
-    for i in range(labyrinthe.shape[0]):
-        for j in range(labyrinthe.shape[1]):
-            if labyrinthe[i, j] == 0:
-                depart = (i, j)
-                labyrinthe[i, j] = 2  # Marquer comme départ
+    for y in range(len(labyrinthe)):
+        for x in range(len(labyrinthe[0])):
+            if labyrinthe[y, x] == 0:
+                depart = (x, y)
+                labyrinthe[y, x] = 2 # Marquer comme départ
                 break
         if 'depart' in locals():
             break
 
     # Trouver le point d'arrivée en bas à droite
-    for i in reversed(range(labyrinthe.shape[0])):
-        for j in reversed(range(labyrinthe.shape[1])):
-            if labyrinthe[i, j] == 0:
-                arrivee = (i, j)
-                labyrinthe[i, j] = 3  # Marquer comme arrivée
+    for y in reversed(range(len(labyrinthe))):
+        for x in reversed(range(len(labyrinthe[0]))):
+            if labyrinthe[y, x] == 0:
+                arrivee = (x, y)
+                labyrinthe[y, x] = 3 # Marquer comme arrivée
                 break
         if 'arrivee' in locals():
             break
