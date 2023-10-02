@@ -21,7 +21,7 @@ def voisins(noeud, grille):
     return voisins
 
 
-def a_etoile(depart, arrivee, grille):
+def a_etoile(depart, arrivee, grille, callback=None, fenetre=None, CELLULE_LARGEUR=None, CELLULE_HAUTEUR=None):
     ouvert = [(heuristique_de_manhattan(depart, arrivee), 0, depart)]  # file de priorité (f, g, noeud)
     ferme = set()
     parents = {depart: None}
@@ -50,6 +50,8 @@ def a_etoile(depart, arrivee, grille):
 
                 heappush(ouvert, (nouveau_f, nouveau_g, voisin))
                 parents[voisin] = noeud_courant
+        if callback:
+            callback(fenetre, ouvert, ferme, CELLULE_LARGEUR, CELLULE_HAUTEUR)
     
     return []  # Retourne un chemin vide si aucun chemin n'est trouvé
 

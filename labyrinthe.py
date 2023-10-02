@@ -1,19 +1,21 @@
 import numpy as np
 import random
 
-def generer_labyrinthe(lignes, colonnes, labyrinthe=None, adjacents=None):
-    if labyrinthe is None:
-        # Initialise toutes les cellules comme des murs
-        labyrinthe = np.ones((lignes, colonnes), dtype=int)
-        
-        # Choix aléatoire d'une cellule de départ et la marque comme chemin
-        start_x, start_y = random.randint(0, lignes - 1), random.randint(0, colonnes - 1)
-        labyrinthe[start_x][start_y] = 0
-        
-        # Liste des cellules adjacentes
-        adjacents = [(start_x, start_y)]
 
-    if adjacents:
+def generer_labyrinthe(lignes, colonnes, dessiner_labyrinthe, fenetre, CELLULE_LARGEUR, CELLULE_HAUTEUR):
+                      
+     
+    # Initialise toutes les cellules comme des murs
+    labyrinthe = np.ones((lignes, colonnes), dtype=int)
+        
+    # Choix aléatoire d'une cellule de départ et la marque comme chemin
+    start_x, start_y = random.randint(0, lignes - 1), random.randint(0, colonnes - 1)
+    labyrinthe[start_x][start_y] = 0
+        
+    # Liste des cellules adjacentes
+    adjacents = [(start_x, start_y)]
+
+    while adjacents:
         x, y = random.choice(adjacents)
         adjacents.remove((x, y))
         
@@ -31,10 +33,11 @@ def generer_labyrinthe(lignes, colonnes, labyrinthe=None, adjacents=None):
             labyrinthe[nx + (x - nx) // 2][ny + (y - ny) // 2] = 0
             adjacents.append((nx, ny))
             adjacents.append((x, y))
+        dessiner_labyrinthe(fenetre, labyrinthe, adjacents, CELLULE_LARGEUR, CELLULE_HAUTEUR)
+    
+    depart, arrivee = trouver_depart_arrivee(labyrinthe)
             
-    return labyrinthe, adjacents
-
-
+    return labyrinthe, depart, arrivee
 
 
 
